@@ -1,0 +1,1328 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HaveFun-API</name>
+    </assembly>
+    <members>
+        <member name="T:HaveFun_API.Controllers.AuthenticationController">
+            <summary>
+            認證
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Controllers.AuthenticationController.#ctor(HaveFun_API.Interface.IServices.ILoginService)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Controllers.AuthenticationController.Authorize">
+            <summary>
+            google登入
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Controllers.AuthenticationController.CallBack(System.String,System.String)">
+            <summary>
+            二次取得token
+            </summary>
+            <param name="code"></param>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HaveFun_API.Enum.AttractionType">
+            <summary>
+            景點類別
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.AttractionType.Unknow">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.AttractionType.Site">
+            <summary>
+            景點
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.AttractionType.Restaurant">
+            <summary>
+            餐廳
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.AttractionType.Hotel">
+            <summary>
+            飯店
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Enum.AuthorityType">
+            <summary>
+            權限類別
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.AuthorityType.Unknow">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.AuthorityType.Disable">
+            <summary>
+            景點
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.AuthorityType.Normal">
+            <summary>
+            一般
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.AuthorityType.Subscription">
+            <summary>
+            訂閱者
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Enum.ShipType">
+            <summary>
+            關係類別
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ShipType.Unknow">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ShipType.Reject">
+            <summary>
+            拒絕邀請
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ShipType.Request">
+            <summary>
+            邀請請求
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ShipType.Friend">
+            <summary>
+            朋友
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Enum.TargetType">
+            <summary>
+            目標類別
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.TargetType.Unknow">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.TargetType.Member">
+            <summary>
+            成員
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.TargetType.Group">
+            <summary>
+            群組
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Enum.PostType">
+            <summary>
+            文章類別
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.PostType.Unknow">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.PostType.Question">
+            <summary>
+            請益
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.PostType.Review">
+            <summary>
+            心得
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Enum.LikeType">
+            <summary>
+            按讚類別
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.LikeType.Unknow">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.LikeType.Question">
+            <summary>
+            文章
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.LikeType.Review">
+            <summary>
+            留言
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Enum.ResultCodeType">
+            <summary>
+            結果種類
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ResultCodeType.Unknow">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ResultCodeType.Success">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ResultCodeType.ErrorParameter">
+            <summary>
+            參數錯誤
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ResultCodeType.Invalid">
+            <summary>
+            憑證過期
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ResultCodeType.Fail">
+            <summary>
+            失敗
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Examples.APIResponseExample`1">
+            <summary>
+            API回應模型
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:HaveFun_API.Examples.APIResponseExample`1.ResultCode">
+            <summary>
+            結果代碼
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Examples.APIResponseExample`1.ResultMessage">
+            <summary>
+            結果訊息
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Examples.APIResponseExample`1.ResultCount">
+            <summary>
+            結果數量
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Examples.APIResponseExample`1.Result">
+            <summary>
+            結果
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.AddressBaseDTO">
+            <summary>
+            地址DTO
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.AddressBaseDTO.Country">
+            <summary>
+            國家
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.AddressBaseDTO.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.AddressBaseDTO.Town">
+            <summary>
+            城鎮
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.AddressBaseDTO.Code">
+            <summary>
+            區碼
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.AddressDTO">
+            <summary>
+            更新地址
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.AddressDTO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.AuthorityMemberDTO">
+            <summary>
+            google登入
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.AuthorityMemberDTO.Mail">
+            <summary>
+            郵箱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.AuthorityMemberDTO.RefreshToken">
+             <summary>
+            Token
+             </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.DTO">
+            <summary>
+            基底
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.DTO.PageNow">
+            <summary>
+            第幾頁
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.DTO.PageShow">
+            <summary>
+            出現幾筆
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.MemberBaseDTO">
+            <summary>
+            會員
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.Mail">
+            <summary>
+            郵箱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.NickName">
+            <summary>
+            暱稱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.Note">
+            <summary>
+            自我介紹
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.AuthorityType">
+            <summary>
+            權限類別
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.RefreshToken">
+            <summary>
+            RefreshToken
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.MemberDTO">
+            <summary>
+            會員
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberDTO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.RequestDTO">
+            <summary>
+            刪除
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.RequestDTO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.SearchAddressDTO">
+            <summary>
+            搜尋地址
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.SearchAddressDTO.Country">
+            <summary>
+            國家
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.SearchAddressDTO.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.SearchAddressDTO.Town">
+            <summary>
+            城鎮
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.AddressPO">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AddressPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AddressPO.Country">
+            <summary>
+            國家
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AddressPO.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AddressPO.Town">
+            <summary>
+            城鎮
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AddressPO.Code">
+            <summary>
+            區碼
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.AttractionPO">
+            <summary>
+            景點
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AttractionPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AttractionPO.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AttractionPO.AddressID">
+            <summary>
+            地址編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AttractionPO.Address">
+            <summary>
+            詳細地址
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AttractionPO.Type">
+            <summary>
+            景點類別
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AttractionPO.CreateTime">
+            <summary>
+            創立時間
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AttractionPO.CreateUser">
+            <summary>
+            創立使用者
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AttractionPO.UpdateTime">
+            <summary>
+            更新時間
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AttractionPO.UpdateUser">
+            <summary>
+            更新使用者
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.AuthorityBelongPO">
+            <summary>
+            權限群組歸屬
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityBelongPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityBelongPO.GroupID">
+            <summary>
+            群組編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityBelongPO.MemberID">
+            <summary>
+            成員編號
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.AuthorityFunctionPO">
+            <summary>
+            權限方法
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityFunctionPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityFunctionPO.Name">
+            <summary>
+            方法名稱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityFunctionPO.EnglishName">
+            <summary>
+            方法英文名稱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityFunctionPO.SystemID">
+            <summary>
+            系統編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityFunctionPO.AuthorityType">
+            <summary>
+            權限要求
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.AuthorityGroupPO">
+            <summary>
+            權限群組
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityGroupPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityGroupPO.Name">
+            <summary>
+            群組名稱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityGroupPO.EnglishName">
+            <summary>
+            群組英文名稱
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.AuthorityPO">
+            <summary>
+            權限
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityPO.Type">
+            <summary>
+            目標類別
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityPO.TargetID">
+            <summary>
+            目標編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityPO.FunctionID">
+            <summary>
+            方法編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityPO.IsRead">
+            <summary>
+            可讀
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityPO.IsCreate">
+            <summary>
+            可新增
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityPO.IsUpdate">
+            <summary>
+            可更新
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthorityPO.IsDelete">
+            <summary>
+            可刪除
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.AuthoritySystemPO">
+            <summary>
+            權限系統
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthoritySystemPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthoritySystemPO.Name">
+            <summary>
+            系統名稱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.AuthoritySystemPO.EnglishName">
+            <summary>
+            系統英文名稱
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.Comment">
+            <summary>
+            留言
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.Comment.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.Comment.PostID">
+            <summary>
+            文章編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.Comment.Content">
+            <summary>
+            留言內容
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.Comment.CreateTime">
+            <summary>
+            留言時間
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.Comment.CreateUser">
+            <summary>
+            留言者
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.FilePO">
+            <summary>
+            檔案
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.FilePO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.FilePO.Type">
+            <summary>
+            目標類別
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.FilePO.TargetID">
+            <summary>
+            目標編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.FilePO.Src">
+            <summary>
+            網址
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.FilePO.CreateTime">
+            <summary>
+            開始時間
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.LikePO">
+            <summary>
+            按讚
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.LikePO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.LikePO.Type">
+            <summary>
+            按讚類別
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.LikePO.TargetID">
+            <summary>
+            目標編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.LikePO.MemberID">
+            <summary>
+            成員編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.LikePO.LikedDate">
+            <summary>
+            按讚日期
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.MemberPO">
+            <summary>
+            成員
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.RefreshToken">
+            <summary>
+            RefreshToken
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.Mail">
+            <summary>
+            郵箱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.NickName">
+            <summary>
+            暱稱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.Note">
+            <summary>
+            自我介紹
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.AuthorityType">
+            <summary>
+            權限類別
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.MemberShipPO">
+            <summary>
+            交友
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberShipPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberShipPO.MemberID">
+            <summary>
+            成員編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberShipPO.FriendID">
+            <summary>
+            對象編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberShipPO.Type">
+            <summary>
+            關係類別
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.PlanningPO">
+            <summary>
+            計劃
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PlanningPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PlanningPO.TargetID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PlanningPO.Type">
+            <summary>
+            目標類別
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PlanningPO.Note">
+            <summary>
+            備註
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PlanningPO.IsPublic">
+            <summary>
+            是否公開
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PlanningPO.CreateTime">
+            <summary>
+            創立時間
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PlanningPO.CreateUser">
+            <summary>
+            創立成員
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.PostPO">
+            <summary>
+            文章
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PostPO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PostPO.MemberID">
+            <summary>
+            發文者
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PostPO.Title">
+            <summary>
+            文章標題
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PostPO.Content">
+            <summary>
+            文章內容
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.PostPO.Type">
+            <summary>
+            文章類別
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.SchedulePO">
+            <summary>
+            行程表
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.PlanningID">
+            <summary>
+            計劃編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.StartTime">
+            <summary>
+            開始時間
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.EndTime">
+            <summary>
+            結束時間
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.MinCost">
+            <summary>
+            最小花費
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.MaxCost">
+            <summary>
+            最多花費
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.Note">
+            <summary>
+            備註
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.AttractionID">
+            <summary>
+            景點編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.CreateTime">
+            <summary>
+            創立時間
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.CreateUser">
+            <summary>
+            創立成員
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.SchedulePO.CurrentVersionID">
+            <summary>
+            現版本編號
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.PO.ScheduleVersionPO">
+            <summary>
+            行程表紀錄
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.ScheduleVersionPO.VersionID">
+            <summary>
+            版本編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.ScheduleVersionPO.PlanningID">
+            <summary>
+            計劃編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.ScheduleVersionPO.ScheduleID">
+            <summary>
+            行程表編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.ScheduleVersionPO.StartTime">
+            <summary>
+            開始時間
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.ScheduleVersionPO.EndTime">
+            <summary>
+            結束時間
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.ScheduleVersionPO.MinCost">
+            <summary>
+            最小花費
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.ScheduleVersionPO.MaxCost">
+            <summary>
+            最大花費
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.ScheduleVersionPO.Note">
+            <summary>
+            備註
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.ScheduleVersionPO.AttractionID">
+            <summary>
+            景點編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.ScheduleVersionPO.CreatedDate">
+            <summary>
+            編輯時間
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.VO.AddressListVO">
+            <summary>
+            地址清單
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.VO.AddressListVO.List">
+            <summary>
+            清單
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.VO.AddressVO">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.VO.AddressVO.ID">
+            <summary>
+            編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.VO.AddressVO.Country">
+            <summary>
+            國家
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.VO.AddressVO.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.VO.AddressVO.Town">
+            <summary>
+            城鎮
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.VO.AddressVO.Code">
+            <summary>
+            區碼
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Repositories.AddressRepository">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AddressRepository.#ctor(HaveFun_API.Schafold.HaveFunContext)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AddressRepository.Get(System.Int32)">
+            <summary>
+            取得
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AddressRepository.GetList(HaveFun_API.Models.DTO.SearchAddressDTO)">
+            <summary>
+            取得清單
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AddressRepository.Insert(HaveFun_API.Models.DTO.AddressBaseDTO)">
+            <summary>
+            新增
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AddressRepository.Update(HaveFun_API.Models.DTO.AddressDTO)">
+            <summary>
+            更新
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AddressRepository.Delete(System.Int32)">
+            <summary>
+            刪除
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HaveFun_API.Repositories.MemberRepository">
+            <summary>
+            會員
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Repositories.MemberRepository.#ctor(HaveFun_API.Schafold.HaveFunContext)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Repositories.MemberRepository.GetByMail(System.String)">
+            <summary>
+            取得
+            </summary>
+            <param name="mail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.MemberRepository.GetByToken(System.String)">
+            <summary>
+            取得
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.MemberRepository.Insert(HaveFun_API.Models.DTO.MemberBaseDTO)">
+            <summary>
+            新增
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.MemberRepository.Insert(System.String)">
+            <summary>
+            新增
+            </summary>
+            <param name="mail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.MemberRepository.Update(HaveFun_API.Models.DTO.MemberDTO)">
+            <summary>
+            更新
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HaveFun_API.Schafold.Global">
+            <summary>
+            參數
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Schafold.Global.ClientId">
+            <summary>
+            goole認證ID
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Schafold.Global.ClientSecret">
+            <summary>
+            google認證Secret
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Schafold.Global.RedirectUri">
+            <summary>
+            返還網址
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Schafold.Global.JWTSecret">
+            <summary>
+            JWT密碼
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Schafold.HaveFunContext">
+            <summary>
+            Context
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Schafold.HaveFunContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{HaveFun_API.Schafold.HaveFunContext})">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Schafold.HaveFunContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            模型創建
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.Attraction">
+            <summary>
+            景點
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.Authority">
+            <summary>
+            權限
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.AuthorityBelong">
+            <summary>
+            權限歸屬
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.AuthorityFunction">
+            <summary>
+            權限方法
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.AuthorityGroup">
+            <summary>
+            權限群組
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.AuthoritySystem">
+            <summary>
+            權限系統
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.File">
+            <summary>
+            檔案
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.Like">
+            <summary>
+            按讚
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.Member">
+            <summary>
+            成員
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.MemberShip">
+            <summary>
+            交友
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.Planning">
+            <summary>
+            規劃
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.Post">
+            <summary>
+            文章
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.Schedule">
+            <summary>
+            行程表
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Schafold.HaveFunContext.ScheduleVersion">
+            <summary>
+            行程表版本
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Services.AddressService">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Services.AddressService.#ctor(HaveFun_API.Interface.IRepositories.IAddressRepository)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Services.AddressService.Get(HaveFun_API.Models.DTO.RequestDTO)">
+            <summary>
+            取得
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HaveFun_API.Services.JWTService">
+            <summary>
+            JWT
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Services.JWTService.#ctor(Microsoft.IdentityModel.Tokens.TokenValidationParameters)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Services.JWTService.GenerateToken(HaveFun_API.Models.DTO.MemberDTO,System.String)">
+            <summary>
+            產生Token
+            </summary>
+            <param name="dto"></param>
+            <param name="Access"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Services.JWTService.ParseToeknToClaim(System.String)">
+            <summary>
+            解析權杖為宣告
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Services.JWTService.Verify(System.String)">
+            <summary>
+            驗證
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HaveFun_API.Services.LoginService">
+            <summary>
+            認證
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Services.LoginService.#ctor(System.Net.Http.HttpClient,HaveFun_API.Interface.IRepositories.IMemberRepository,HaveFun_API.Interface.IServices.IJWTService)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Services.LoginService.Authorize">
+            <summary>
+            認證
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Services.LoginService.GooleLogin(System.String,System.String)">
+            <summary>
+            用Token拿google個人資料
+            </summary>
+            <param name="code"></param>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HaveFun_API.Utility.Aes">
+            <summary>
+            對稱加密
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Utility.Aes.Encrypt(System.Object)">
+            <summary>
+            加密
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Utility.Aes.Decrypt(System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HaveFun_API.Utility.Const">
+            <summary>
+            常數
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Utility.Const.ResultCode">
+            <summary>
+            結果代碼
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Utility.Const.ResultMessage">
+            <summary>
+            結果訊息
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Utility.Const.Result">
+            <summary>
+            結果
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Utility.Const.ResultCount">
+            <summary>
+            結果數量
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Utility.Const.FileSrc">
+            <summary>
+            檔案儲存地
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Utility.Const.MIME">
+            <summary>
+            MINE
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Utility.Tool">
+            <summary>
+            工具
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Utility.Tool.GetDescriptionText(System.Enum)">
+            <summary>
+            取得列舉敘述
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Utility.Tool.CheckParam(System.Boolean,System.Text.StringBuilder,System.String)">
+            <summary>
+            檢查參數
+            </summary>
+            <param name="isempty"></param>
+            <param name="APIMsg"></param>
+            <param name="Msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Utility.Tool.MD5(System.String)">
+            <summary>
+            MD5
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

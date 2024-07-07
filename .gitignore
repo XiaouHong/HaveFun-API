@@ -1,0 +1,10 @@
+﻿*.json
+*.csproj
+*.user
+HaveFun-API/obj
+HaveFun-API/bin
+.vs/HaveFun-API/DesignTimeBuild
+.vs/HaveFun-API/config
+.vs/HaveFun-API/FileContentIndex
+.vs/HaveFun-API/v17
+.vs/ProjectEvaluation
