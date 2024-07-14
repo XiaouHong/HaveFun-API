@@ -102,6 +102,7 @@ namespace HaveFun_API.Repositories
 				AuthorityType = AuthorityType.Normal
 			};
 			await _haveFun.Member.AddAsync(New);
+			await _haveFun.SaveChangesAsync();
 			return New.ID;
 		}
 

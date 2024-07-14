@@ -20,12 +20,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HaveFun_API.Controllers.AuthenticationController.CallBack(System.String,System.String)">
+        <member name="M:HaveFun_API.Controllers.AuthenticationController.CallBack(HaveFun_API.Models.DTO.GoogleDTO)">
             <summary>
             二次取得token
             </summary>
-            <param name="code"></param>
-            <param name="state"></param>
+            <param name="dto"></param>
             <returns></returns>
         </member>
         <member name="T:HaveFun_API.Enum.AttractionType">
@@ -219,6 +218,17 @@
             結果
             </summary>
         </member>
+        <member name="T:HaveFun_API.Examples.GoogleExample">
+            <summary>
+            模型範例
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Examples.GoogleExample.GetExamples">
+            <summary>
+            建構子
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HaveFun_API.Models.DTO.AddressBaseDTO">
             <summary>
             地址DTO
@@ -282,6 +292,46 @@
         <member name="P:HaveFun_API.Models.DTO.DTO.PageShow">
             <summary>
             出現幾筆
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.GoogleDTO">
+            <summary>
+            GoogleDTO
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.GoogleDTO.State">
+            <summary>
+            回傳state
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.GoogleDTO.Code">
+            <summary>
+            回傳code
+            </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.GoogleLoginDTO">
+            <summary>
+            google登入
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.GoogleLoginDTO.Token">
+            <summary>
+            登入token
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.GoogleLoginDTO.IsMember">
+            <summary>
+            是否為會員
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.GoogleLoginDTO.Name">
+            <summary>
+            google名稱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.GoogleLoginDTO.Mail">
+            <summary>
+            google郵件
             </summary>
         </member>
         <member name="T:HaveFun_API.Models.DTO.MemberBaseDTO">
@@ -692,6 +742,11 @@
         <member name="P:HaveFun_API.Models.PO.MemberPO.Mail">
             <summary>
             郵箱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.Password">
+            <summary>
+            密碼
             </summary>
         </member>
         <member name="P:HaveFun_API.Models.PO.MemberPO.Name">

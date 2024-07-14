@@ -3,7 +3,9 @@ using HaveFun_API.Interface.IServices;
 using HaveFun_API.Repositories;
 using HaveFun_API.Schafold;
 using HaveFun_API.Services;
+using HaveFun_API.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -20,16 +22,31 @@ builder.Services.AddDbContext<HaveFunContext>(options =>
 {
 	options.UseSqlServer(configuration.GetSection("ConnectionStrings:SQLServer").Value);
 });
-Global.ClientId = configuration.GetSection("OATH:ClientId").Value ?? "";
-Global.ClientSecret = configuration.GetSection("OATH:ClientSecret").Value ?? "";
-Global.RedirectUri = configuration.GetSection("OATH:RedirectUri").Value ?? "";
+Global.ClientId = configuration.GetSection("GoogleOAuth:ClientId").Value ?? "";
+Global.ClientSecret = configuration.GetSection("GoogleOAuth:ClientSecret").Value ?? "";
+Global.RedirectUri = configuration.GetSection("GoogleOAuth:RedirectUri").Value ?? "";
 Global.JWTSecret = configuration.GetSection("JwtConfig:Secret").Value ?? "";
 //builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 //{
 //	googleOptions.ClientId = configuration.GetSection("OATH:ClientId").Value;
 //	googleOptions.ClientSecret = configuration.GetSection("OATH:ClientSecret").Value;
 //});
-// HttpClientFactory https://www.dotblogs.com.tw/Null/2020/05/04/211830
+// 跨網域存取
+builder.Services.AddCors(Options => {
+	Options.AddPolicy("CorsPolicy", Policy =>
+	Policy.AllowAnyMethod()
+		  .AllowAnyHeader()
+		  .AllowAnyOrigin()
+		  );
+});
+// ForwardedHeaders https://blog.darkthread.net/blog/aspnetcore-docker-notes-4/
+builder.Services.Configure<ForwardedHeadersOptions>(Options => {
+	Options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
+// HttpContext
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 // MemoryCache
 builder.Services.AddMvc().AddDataAnnotationsLocalization()
 						 .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonDateTimeConverter()));
@@ -83,6 +100,8 @@ builder.Services.AddAuthentication(option =>
 // Hangfire 排程 https://blog.darkthread.net/blog/category/hangfire
 var app = builder.Build();
 
+//https://ithelp.ithome.com.tw/articles/10245157?sc=pt
+app.UseCors("CorsPolicy");
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI(option =>

@@ -1,12 +1,9 @@
-﻿using HaveFun_API.Enum;
-using HaveFun_API.Interface.IRepositories;
+﻿using HaveFun_API.Interface.IRepositories;
 using HaveFun_API.Interface.IServices;
-using HaveFun_API.Repositories;
+using HaveFun_API.Models.DTO;
 using HaveFun_API.Schafold;
 using IdentityModel.Client;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace HaveFun_API.Services
 {
@@ -52,14 +49,13 @@ namespace HaveFun_API.Services
 		/// <param name="code"></param>
 		/// <param name="state"></param>
 		/// <returns></returns>
-		public async Task<bool> GooleLogin(string code, string state)
+		public async Task<GoogleLoginDTO> GooleLogin(string code, string state)
 		{
-			bool result = false;
-			var message = "";
+			var result = new GoogleLoginDTO();
 			// 檢查 state 是否匹配以防止 CSRF 攻擊
 			if (state != "random_state_string")
 			{
-				result = false;
+				return result;
 			}
 			var tokenResponse = await _httpClient.RequestAuthorizationCodeTokenAsync(new AuthorizationCodeTokenRequest
 			{
@@ -72,7 +68,7 @@ namespace HaveFun_API.Services
 
 			if (tokenResponse.IsError)
 			{
-				result = false;
+				return result;
 			}
 
 			var accessToken = tokenResponse.AccessToken;
@@ -81,23 +77,30 @@ namespace HaveFun_API.Services
 			var userInfoResponse = await _httpClient.GetAsync("https://www.googleapis.com/oauth2/v3/userinfo");
 			if (!userInfoResponse.IsSuccessStatusCode)
 			{
-				result = false;
+				return result;
 			}
 
 			var userInfo = await userInfoResponse.Content.ReadAsStringAsync();
-			dynamic user = JsonConvert.DeserializeObject<JObject>(userInfo);
-			var mail = (string)user.email;
+			var user = JsonConvert.DeserializeObject<GoogleInfoDTO>(userInfo);
+			var mail = user.Email;
+			var name = user.Name;
+
 			var member = await _memberRepository.GetByMail(mail);
-			if (member.ID <= 0)
+
+			if (member.ID > 0)
 			{
-				var ID = await _memberRepository.Insert(mail);
+				var tokens = _jwtService.GenerateToken(member, "");
+				var updateToken = await _memberRepository.Update(new Models.DTO.MemberDTO
+				{
+					Token = tokens.token,
+					RefreshToken = tokens.refreshToken,
+				});
+				if(!updateToken) { return result; }
+				result.IsMember = true;
+				result.Token = tokens.token;
 			}
-			var tokens = _jwtService.GenerateToken(member, "");
-			result = await _memberRepository.Update(new Models.DTO.MemberDTO
-			{
-				Token = tokens.token,
-				RefreshToken = tokens.refreshToken,
-			});
+			result.Mail = mail;
+			result.Name= name;
 			return result;
 		}
 	}

@@ -34,10 +34,15 @@ public class MemberPO
 	[MaxLength(100)]
 	public string Mail { get; set; } = "";
 
-    /// <summary>
-    /// 名字
-    /// </summary>
-    [MaxLength(20)]
+	/// <summary>
+	/// 密碼
+	/// </summary>
+	public string Password { get; set; } = "";
+
+	/// <summary>
+	/// 名字
+	/// </summary>
+	[MaxLength(20)]
     public string Name { get; set; } = "";
 
     /// <summary>

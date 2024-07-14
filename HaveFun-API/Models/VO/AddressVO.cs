@@ -46,7 +46,7 @@ namespace HaveFun_API.Models.VO
 		/// <summary>
 		/// 區碼
 		/// </summary>
-		[JsonPropertyName("dode")]
+		[JsonPropertyName("code")]
 		public string Code { get; set; } = "";
 	}
 }

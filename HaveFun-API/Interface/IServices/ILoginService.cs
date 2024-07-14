@@ -1,8 +1,10 @@
-﻿namespace HaveFun_API.Interface.IServices
+﻿using HaveFun_API.Models.DTO;
+
+namespace HaveFun_API.Interface.IServices
 {
     public interface ILoginService
     {
         string Authorize();
-        Task<bool> GooleLogin(string code, string state);
+        Task<GoogleLoginDTO> GooleLogin(string code, string state);
     }
 }

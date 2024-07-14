@@ -1,12 +1,10 @@
 ﻿using HaveFun_API.Enum;
 using HaveFun_API.Examples;
 using HaveFun_API.Interface.IServices;
-using HaveFun_API.Schafold;
-using HaveFun_API.Services;
+using HaveFun_API.Models.DTO;
 using HaveFun_API.Utility;
-using IdentityModel.Client;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace HaveFun_API.Controllers
 {
@@ -33,28 +31,35 @@ namespace HaveFun_API.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet("authorize")]
-		public IActionResult Authorize()
+		[ProducesResponseType(typeof(APIResponseExample<string>), statusCode: 200)]
+		public Dictionary<string, object> Authorize()
 		{
 			var authorizeUrl = _authorizeService.Authorize();
-			return Redirect(authorizeUrl);
+			var isEmpty = !string.IsNullOrEmpty(authorizeUrl);
+			return new Dictionary<string, object>
+			{
+				{Const.ResultCode, isEmpty ? ResultCodeType.Success : ResultCodeType.Fail},
+				{Const.ResultMessage, isEmpty ? "成功" : "失敗" },
+				{Const.Result, authorizeUrl }
+			};
 		}
 
 		/// <summary>
 		/// 二次取得token
 		/// </summary>
-		/// <param name="code"></param>
-		/// <param name="state"></param>
+		/// <param name="dto"></param>
 		/// <returns></returns>
 		[HttpPost("callback")]
-		//[SwaggerRequestExample(typeof(Entry), typeof(EntryExample))]
-		[ProducesResponseType(typeof(APIResponseExample<string>), statusCode: 200)]
-		public async Task<Dictionary<string, object>> CallBack([FromQuery] string code, [FromQuery] string state)
+		[SwaggerRequestExample(typeof(GoogleDTO), typeof(GoogleExample))]
+		[ProducesResponseType(typeof(APIResponseExample<GoogleLoginDTO>), statusCode: 200)]
+		public async Task<Dictionary<string, object>> CallBack(GoogleDTO dto)
 		{
-			var Result = await _authorizeService.GooleLogin(code, state);
+			var Result = await _authorizeService.GooleLogin(dto.Code, dto.State);
 			return new Dictionary<string, object>
 			{
-				{Const.ResultCode, Result ? ResultCodeType.Success : ResultCodeType.Fail},
-				{Const.ResultMessage, Result ? "成功" : "失敗" }
+				{Const.ResultCode, ResultCodeType.Success},
+				{Const.ResultMessage, "成功"},
+				{Const.Result, Result }
 			};
 		}
 	}
