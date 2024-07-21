@@ -76,33 +76,17 @@ namespace HaveFun_API.Repositories
 		/// </summary>
 		/// <param name="dto"></param>
 		/// <returns></returns>
-		public async Task<bool> Insert(MemberBaseDTO dto)
+		public async Task<int> Insert(MemberBaseDTO dto)
 		{
-			await _haveFun.Member.AddAsync(new MemberPO
+			var New = new MemberPO
 			{
 				Mail = dto.Mail,
 				Name = dto.Name,
 				NickName = dto.NickName,
 				Note = dto.Note,
 				AuthorityType = AuthorityType.Normal
-			});
-			return await _haveFun.SaveChangesAsync() > 0;
-		}
-
-		/// <summary>
-		/// 新增
-		/// </summary>
-		/// <param name="mail"></param>
-		/// <returns></returns>
-		public async Task<int> Insert(string mail)
-		{
-			var New = new MemberPO
-			{
-				Mail = mail,
-				AuthorityType = AuthorityType.Normal
 			};
 			await _haveFun.Member.AddAsync(New);
-			await _haveFun.SaveChangesAsync();
 			return New.ID;
 		}
 

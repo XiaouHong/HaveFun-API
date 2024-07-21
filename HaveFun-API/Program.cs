@@ -58,10 +58,12 @@ builder.Services.AddHttpClient();
 
 // Repositories
 builder.Services.AddTransient<IMemberRepository, MemberRepository>();
+builder.Services.AddTransient<IAuthorityRepository, AuthorityRepository>();
 
 // Services
 builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddTransient<IJWTService, JWTService>();
+builder.Services.AddTransient<IMemberService, MemberService>();
 
 builder.Services.AddSwaggerGen(option =>
 {

@@ -11,9 +11,9 @@ namespace HaveFun_API.Controllers
 	/// <summary>
 	/// 認證
 	/// </summary>
+	[Produces("application/json")]
 	[Route("[controller]")]
 	[ApiController]
-	[Produces("application/json")]
 	public class AuthenticationController : ControllerBase
 	{
 		private readonly ILoginService _authorizeService;

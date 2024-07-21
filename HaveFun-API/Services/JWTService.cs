@@ -41,6 +41,8 @@ namespace HaveFun_API.Services
 				{
 					//https://blog.poychang.net/authenticating-jwt-tokens-in-asp-net-core-webapi/
 					new Claim(JwtRegisteredClaimNames.NameId, dto.ID.ToString()),
+					new Claim(JwtRegisteredClaimNames.Sub, dto.Mail),
+					new Claim(JwtRegisteredClaimNames.Sub, dto.NickName),
 					new Claim(JwtRegisteredClaimNames.Sub, Access),
 				}),
 				Expires = DateTime.Now.AddMinutes(30),

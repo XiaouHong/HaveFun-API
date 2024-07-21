@@ -27,6 +27,23 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="T:HaveFun_API.Controllers.MemberController">
+            <summary>
+            成員
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Controllers.MemberController.#ctor(HaveFun_API.Interface.IServices.IMemberService)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Controllers.MemberController.Insert(HaveFun_API.Models.DTO.MemberBaseDTO)">
+            <summary>
+            新增成員
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
         <member name="T:HaveFun_API.Enum.AttractionType">
             <summary>
             景點類別
@@ -192,6 +209,36 @@
             失敗
             </summary>
         </member>
+        <member name="T:HaveFun_API.Enum.ActionType">
+            <summary>
+            動作種類
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ActionType.Unknow">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ActionType.IsRead">
+            <summary>
+            可查閱
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ActionType.IsCreate">
+            <summary>
+            可建立
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ActionType.IsUpdate">
+            <summary>
+            可更新
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Enum.ActionType.IsDelete">
+            <summary>
+            可刪除
+            </summary>
+        </member>
         <member name="T:HaveFun_API.Examples.APIResponseExample`1">
             <summary>
             API回應模型
@@ -224,6 +271,17 @@
             </summary>
         </member>
         <member name="M:HaveFun_API.Examples.GoogleExample.GetExamples">
+            <summary>
+            建構子
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HaveFun_API.Examples.MemberBaseExample">
+            <summary>
+            模型範例
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Examples.MemberBaseExample.GetExamples">
             <summary>
             建構子
             </summary>
@@ -309,6 +367,21 @@
             回傳code
             </summary>
         </member>
+        <member name="T:HaveFun_API.Models.DTO.GoogleInfoDTO">
+            <summary>
+            Google資訊
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.GoogleInfoDTO.Email">
+            <summary>
+            郵件
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.GoogleInfoDTO.Name">
+            <summary>
+            名稱
+            </summary>
+        </member>
         <member name="T:HaveFun_API.Models.DTO.GoogleLoginDTO">
             <summary>
             google登入
@@ -344,6 +417,11 @@
             郵箱
             </summary>
         </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.Password">
+            <summary>
+            密碼
+            </summary>
+        </member>
         <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.Name">
             <summary>
             名字
@@ -359,21 +437,6 @@
             自我介紹
             </summary>
         </member>
-        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.AuthorityType">
-            <summary>
-            權限類別
-            </summary>
-        </member>
-        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.RefreshToken">
-            <summary>
-            RefreshToken
-            </summary>
-        </member>
-        <member name="P:HaveFun_API.Models.DTO.MemberBaseDTO.Token">
-            <summary>
-            Token
-            </summary>
-        </member>
         <member name="T:HaveFun_API.Models.DTO.MemberDTO">
             <summary>
             會員
@@ -382,6 +445,21 @@
         <member name="P:HaveFun_API.Models.DTO.MemberDTO.ID">
             <summary>
             編號
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberDTO.RefreshToken">
+            <summary>
+            RefreshToken
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberDTO.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberDTO.AuthorityType">
+            <summary>
+            權限類別
             </summary>
         </member>
         <member name="T:HaveFun_API.Models.DTO.RequestDTO">
@@ -1064,6 +1142,46 @@
             <param name="ID"></param>
             <returns></returns>
         </member>
+        <member name="T:HaveFun_API.Repositories.AuthorityRepository">
+            <summary>
+            權限
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AuthorityRepository.#ctor(HaveFun_API.Schafold.HaveFunContext)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AuthorityRepository.GetAcess(System.Int32)">
+            <summary>
+            取得訪問權
+            </summary>
+            <param name="ID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AuthorityRepository.GetFunctionEngName(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            取得Function Eng Name
+            </summary>
+            <param name="functionIDList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AuthorityRepository.CheckAction(System.Int32,System.String,HaveFun_API.Enum.ActionType)">
+            <summary>
+            確認是否有權限
+            </summary>
+            <param name="targetID"></param>
+            <param name="functionEngName"></param>
+            <param name="actionType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Repositories.AuthorityRepository.InsertNormalAuthority(System.Int32)">
+            <summary>
+            新增普通權限
+            </summary>
+            <param name="targetID"></param>
+            <returns></returns>
+        </member>
         <member name="T:HaveFun_API.Repositories.MemberRepository">
             <summary>
             會員
@@ -1093,13 +1211,6 @@
             新增
             </summary>
             <param name="dto"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HaveFun_API.Repositories.MemberRepository.Insert(System.String)">
-            <summary>
-            新增
-            </summary>
-            <param name="mail"></param>
             <returns></returns>
         </member>
         <member name="M:HaveFun_API.Repositories.MemberRepository.Update(HaveFun_API.Models.DTO.MemberDTO)">
@@ -1278,7 +1389,7 @@
             認證
             </summary>
         </member>
-        <member name="M:HaveFun_API.Services.LoginService.#ctor(System.Net.Http.HttpClient,HaveFun_API.Interface.IRepositories.IMemberRepository,HaveFun_API.Interface.IServices.IJWTService)">
+        <member name="M:HaveFun_API.Services.LoginService.#ctor(System.Net.Http.HttpClient,HaveFun_API.Interface.IRepositories.IMemberRepository,HaveFun_API.Interface.IServices.IJWTService,HaveFun_API.Interface.IRepositories.IAuthorityRepository)">
             <summary>
             建構子
             </summary>
@@ -1295,6 +1406,23 @@
             </summary>
             <param name="code"></param>
             <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HaveFun_API.Services.MemberService">
+            <summary>
+            成員
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Services.MemberService.#ctor(HaveFun_API.Interface.IRepositories.IMemberRepository,HaveFun_API.Interface.IRepositories.IAuthorityRepository)">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Services.MemberService.Insert(HaveFun_API.Models.DTO.MemberBaseDTO)">
+            <summary>
+            新增
+            </summary>
+            <param name="dto"></param>
             <returns></returns>
         </member>
         <member name="T:HaveFun_API.Utility.Aes">
@@ -1377,6 +1505,13 @@
             MD5
             </summary>
             <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Utility.Tool.IsValidEmail(System.String)">
+            <summary>
+            是否為正確的郵件
+            </summary>
+            <param name="email"></param>
             <returns></returns>
         </member>
     </members>

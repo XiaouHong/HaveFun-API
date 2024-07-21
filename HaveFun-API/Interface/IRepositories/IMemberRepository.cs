@@ -6,9 +6,7 @@ namespace HaveFun_API.Interface.IRepositories
     {
         Task<MemberDTO> GetByMail(string mail);
         Task<MemberDTO> GetByToken(string token);
-        Task<bool> Insert(MemberBaseDTO dto);
-        Task<int> Insert(string mail);
-
+        Task<int> Insert(MemberBaseDTO dto);
 		Task<bool> Update(MemberDTO dto);
     }
 }

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace HaveFun_API.Utility
 {
@@ -48,6 +49,26 @@ namespace HaveFun_API.Utility
 			var dataBytes = Encoding.UTF8.GetBytes(value);
 			var hashBytes = System.Security.Cryptography.MD5.HashData(dataBytes);
 			return Convert.ToBase64String(hashBytes);
+		}
+
+		/// <summary>
+		/// 是否為正確的郵件格式
+		/// </summary>
+		/// <param name="email"></param>
+		/// <returns></returns>
+		public static bool IsValidEmail(string email)
+		{
+			return Regex.IsMatch(email, @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+		}
+
+		/// <summary>
+		/// 是否為正確的密碼格式
+		/// </summary>
+		/// <param name="password"></param>
+		/// <returns></returns>
+		public static bool IsValidPassword(string password)
+		{
+			return Regex.IsMatch(password, @"^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$.\%\^\&\*\(\)])[0-9a-zA-Z!@#$.\%\^\&\*\(\)]{8,12}$");
 		}
 	}
 }

@@ -7,25 +7,28 @@ using Newtonsoft.Json;
 
 namespace HaveFun_API.Services
 {
-    /// <summary>
-    /// 認證
-    /// </summary>
-    public class LoginService : ILoginService
+	/// <summary>
+	/// 認證
+	/// </summary>
+	public class LoginService : ILoginService
 	{
 		private readonly HttpClient _httpClient;
 		private readonly IMemberRepository _memberRepository;
 		private readonly IJWTService _jwtService;
+		private readonly IAuthorityRepository _authorityRepository;
 
 		/// <summary>
 		/// 建構子
 		/// </summary>
 		public LoginService(HttpClient httpClient,
 							IMemberRepository memberRepository,
-							IJWTService jwtService)
+							IJWTService jwtService,
+							IAuthorityRepository authorityRepository)
 		{
 			_httpClient = httpClient;
 			_memberRepository = memberRepository;
 			_jwtService = jwtService;
+			_authorityRepository = authorityRepository;
 		}
 
 		/// <summary>
@@ -89,18 +92,19 @@ namespace HaveFun_API.Services
 
 			if (member.ID > 0)
 			{
-				var tokens = _jwtService.GenerateToken(member, "");
+				var access = await _authorityRepository.GetAcess(member.ID);
+				var tokens = _jwtService.GenerateToken(member, access);
 				var updateToken = await _memberRepository.Update(new Models.DTO.MemberDTO
 				{
 					Token = tokens.token,
 					RefreshToken = tokens.refreshToken,
 				});
-				if(!updateToken) { return result; }
+				if (!updateToken) { return result; }
 				result.IsMember = true;
 				result.Token = tokens.token;
 			}
 			result.Mail = mail;
-			result.Name= name;
+			result.Name = name;
 			return result;
 		}
 	}

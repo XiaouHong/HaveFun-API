@@ -1,4 +1,5 @@
 ﻿using HaveFun_API.Enum;
+using System.Text.Json.Serialization;
 
 namespace HaveFun_API.Models.DTO
 {
@@ -10,36 +11,31 @@ namespace HaveFun_API.Models.DTO
 		/// <summary>
 		/// 郵箱
 		/// </summary>
+		[JsonPropertyName("mail")]
 		public string Mail { get; set; } = "";
+
+		/// <summary>
+		/// 密碼
+		/// </summary>
+		[JsonPropertyName("password")]
+		public string Password { get; set; } = "";
 
 		/// <summary>
 		/// 名字
 		/// </summary>
+		[JsonPropertyName("name")]
 		public string Name { get; set; } = "";
 
 		/// <summary>
 		/// 暱稱
 		/// </summary>
+		[JsonPropertyName("nickName")]
 		public string NickName { get; set; } = "";
 
 		/// <summary>
 		/// 自我介紹
 		/// </summary>
+		[JsonPropertyName("note")]
 		public string Note { get; set; } = "";
-
-		/// <summary>
-		/// 權限類別
-		/// </summary>
-		public AuthorityType AuthorityType { get; set; } = AuthorityType.Unknow;
-
-		/// <summary>
-		/// RefreshToken
-		/// </summary>
-		public string RefreshToken { get; set; } = "";
-
-		/// <summary>
-		/// Token
-		/// </summary>
-		public string Token { get; set; } = "";
 	}
 }

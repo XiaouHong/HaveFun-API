@@ -180,4 +180,36 @@ namespace HaveFun_API.Enum
 		[Description("失敗")]
 		Fail = 4
 	}
+
+	/// <summary>
+	/// 動作種類
+	/// </summary>
+	public enum ActionType
+	{
+		/// <summary>
+		/// 未知
+		/// </summary>
+		[Description("未知")]
+		Unknow = 0,
+		/// <summary>
+		/// 可查閱
+		/// </summary>
+		[Description("可查閱")]
+		IsRead = 1,
+		/// <summary>
+		/// 可建立
+		/// </summary>
+		[Description("可建立")]
+		IsCreate = 2,
+		/// <summary>
+		/// 可更新
+		/// </summary>
+		[Description("可更新")]
+		IsUpdate = 3,
+		/// <summary>
+		/// 可刪除
+		/// </summary>
+		[Description("可刪除")]
+		IsDelete = 4
+	}
 }
