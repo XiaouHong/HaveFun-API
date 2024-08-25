@@ -28,11 +28,12 @@ namespace HaveFun_API.Repositories
 		/// <returns></returns>
 		public async Task<string> GetAcess(int ID)
 		{
-			var Query = await _haveFun.Authority.AsQueryable()
-												.Where(x => x.TargetID == ID)
-												.Where(x => x.IsRead)
-												.ToListAsync();
-			var functionEngNameList = GetFunctionEngName(Query.Select(x => x.FunctionID).ToList());
+			var functionIDList = await _haveFun.Authority.AsQueryable()
+														 .AsNoTracking()
+											  			 .Where(x => x.TargetID == ID && x.IsRead)
+														 .Select(x => x.FunctionID)
+														 .ToListAsync();
+			var functionEngNameList = await GetFunctionEngName(functionIDList);
 			return string.Join(",", functionEngNameList);
 		}
 
@@ -44,9 +45,11 @@ namespace HaveFun_API.Repositories
 		public async Task<List<string>> GetFunctionEngName(List<int> functionIDList)
 		{
 			var Query = await _haveFun.AuthorityFunction.AsQueryable()
+														.AsNoTracking()
 														.Where(x => functionIDList.Contains(x.ID))
+														.Select(x => x.EnglishName)
 														.ToListAsync();
-			return Query.Select(x => x.EnglishName).ToList();
+			return Query;
 		}
 
 		/// <summary>

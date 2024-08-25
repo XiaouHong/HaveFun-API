@@ -3,7 +3,6 @@ using HaveFun_API.Interface.IServices;
 using HaveFun_API.Repositories;
 using HaveFun_API.Schafold;
 using HaveFun_API.Services;
-using HaveFun_API.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +25,9 @@ Global.ClientId = configuration.GetSection("GoogleOAuth:ClientId").Value ?? "";
 Global.ClientSecret = configuration.GetSection("GoogleOAuth:ClientSecret").Value ?? "";
 Global.RedirectUri = configuration.GetSection("GoogleOAuth:RedirectUri").Value ?? "";
 Global.JWTSecret = configuration.GetSection("JwtConfig:Secret").Value ?? "";
+Global.ExpiredTime = double.Parse(configuration.GetSection("JwtConfig:ExpiredTime").Value);
+Global.RefreshTokenExpiredTime = double.Parse(configuration.GetSection("JwtConfig:RefreshTokenExpiredTime").Value);
+Global.FontEndUri = configuration.GetSection("FontEnd:Uri").Value;
 //builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 //{
 //	googleOptions.ClientId = configuration.GetSection("OATH:ClientId").Value;
@@ -34,9 +36,11 @@ Global.JWTSecret = configuration.GetSection("JwtConfig:Secret").Value ?? "";
 // 跨網域存取
 builder.Services.AddCors(Options => {
 	Options.AddPolicy("CorsPolicy", Policy =>
-	Policy.AllowAnyMethod()
+	Policy.AllowCredentials()
+		  .AllowAnyMethod()
 		  .AllowAnyHeader()
-		  .AllowAnyOrigin()
+		  //.AllowAnyOrigin()
+		  .WithOrigins(Global.FontEndUri)
 		  );
 });
 // ForwardedHeaders https://blog.darkthread.net/blog/aspnetcore-docker-notes-4/
@@ -75,15 +79,13 @@ builder.Services.AddSwaggerGen(option =>
 	});
 });
 
-//JWT
-byte[] Key = Encoding.UTF8.GetBytes(Global.JWTSecret);
 var tokenValidationParameters = new TokenValidationParameters
 {
 	ValidateIssuer = false,
 	ValidateAudience = false,
 	ValidateIssuerSigningKey = true,
-	IssuerSigningKey = new SymmetricSecurityKey(Key),
-	ValidateLifetime = false,
+	IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Global.JWTSecret)),
+	ValidateLifetime = true,
 	ClockSkew = TimeSpan.Zero
 };
 builder.Services.AddSingleton(tokenValidationParameters);
@@ -99,6 +101,8 @@ builder.Services.AddAuthentication(option =>
 	option.SaveToken = true;
 	option.TokenValidationParameters = tokenValidationParameters;
 });
+
+builder.Services.AddAuthorization();
 // Hangfire 排程 https://blog.darkthread.net/blog/category/hangfire
 var app = builder.Build();
 
@@ -113,9 +117,8 @@ app.UseSwaggerUI(option =>
 });
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

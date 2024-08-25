@@ -14,5 +14,29 @@
 		///Token
 		/// </summary>
 		public string RefreshToken { get; set; } = "";
+
+		/// <summary>
+		///Token
+		/// </summary>
+		public string AccessToken { get; set; } = "";
+	}
+
+	/// <summary>
+	/// RefreshToken
+	/// </summary>
+	public class RefreshTokenDTO
+	{
+		/// <summary>
+		///Token
+		/// </summary>
+		public string Token { get; set; } = "";
+		/// <summary>
+		///Token
+		/// </summary>
+		public DateTime Expiration { get; set; } = DateTime.MinValue;
+		/// <summary>
+		///Token
+		/// </summary>
+		public int UserId { get; set; } = 0;
 	}
 }

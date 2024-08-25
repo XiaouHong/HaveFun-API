@@ -4,7 +4,6 @@ using HaveFun_API.Models.DTO;
 using HaveFun_API.Models.PO;
 using HaveFun_API.Schafold;
 using Microsoft.EntityFrameworkCore;
-using NPOI.SS.Formula.Functions;
 
 namespace HaveFun_API.Repositories
 {
@@ -28,23 +27,11 @@ namespace HaveFun_API.Repositories
 		/// </summary>
 		/// <param name="mail"></param>
 		/// <returns></returns>
-		public async Task<MemberDTO> GetByMail(string mail)
+		public async Task<MemberPO> GetByMail(string mail)
 		{
-			var Result = new MemberDTO();
-			var Query = await _haveFun.Member.AsQueryable()
-											 .Where(x => x.Mail == mail)
-											 .FirstOrDefaultAsync();
-			if (Query == null)
-			{
-				return Result;
-			}
-			Result.ID = Query.ID;
-			Result.Mail = Query.Mail;
-			Result.Name = Query.Name;
-			Result.NickName = Query.NickName;
-			Result.Note = Query.Note;
-			Result.AuthorityType = Query.AuthorityType;
-			return Result;
+			return await _haveFun.Member.AsQueryable()
+										.Where(x => x.Mail == mail)
+										.FirstOrDefaultAsync() ?? new MemberPO();
 		}
 
 		/// <summary>
@@ -81,12 +68,15 @@ namespace HaveFun_API.Repositories
 			var New = new MemberPO
 			{
 				Mail = dto.Mail,
+				Password = dto.Password,
 				Name = dto.Name,
 				NickName = dto.NickName,
 				Note = dto.Note,
-				AuthorityType = AuthorityType.Normal
+				AuthorityType = AuthorityType.Normal,
+				CreateTime = DateTime.Now
 			};
 			await _haveFun.Member.AddAsync(New);
+			await _haveFun.SaveChangesAsync();
 			return New.ID;
 		}
 
@@ -97,42 +87,42 @@ namespace HaveFun_API.Repositories
 		/// <returns></returns>
 		public async Task<bool> Update(MemberDTO dto)
 		{
-			var Origin = _haveFun.Member.AsQueryable()
+			var origin = _haveFun.Member.AsQueryable()
 										.Where(x => x.ID == dto.ID)
 										.FirstOrDefault();
-			if (Origin == null)
+			if (origin == null)
 			{
 				return false;
 			}
 
 			if (!string.IsNullOrEmpty(dto.Name))
 			{
-				Origin.Name = dto.Name;
+				origin.Name = dto.Name;
 			}
 
 			if (!string.IsNullOrEmpty(dto.NickName))
 			{
-				Origin.NickName = dto.NickName;
+				origin.NickName = dto.NickName;
 			}
 
 			if (!string.IsNullOrEmpty(dto.Note))
 			{
-				Origin.Note = dto.Note;
+				origin.Note = dto.Note;
 			}
 
-			if (!string.IsNullOrEmpty(dto.Token))
+			if (!string.IsNullOrEmpty(dto.AccessToken))
 			{
-				Origin.Token = dto.Token;
+				origin.AccessToken = dto.AccessToken;
 			}
 
 			if (!string.IsNullOrEmpty(dto.RefreshToken))
 			{
-				Origin.RefreshToken = dto.RefreshToken;
+				origin.RefreshToken = dto.RefreshToken;
 			}
 
 			if (dto.AuthorityType != AuthorityType.Unknow)
 			{
-				Origin.AuthorityType = dto.AuthorityType;
+				origin.AuthorityType = dto.AuthorityType;
 			}
 
 			return await _haveFun.SaveChangesAsync() > 0;

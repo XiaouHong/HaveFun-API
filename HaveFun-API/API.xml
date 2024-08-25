@@ -32,7 +32,7 @@
             成員
             </summary>
         </member>
-        <member name="M:HaveFun_API.Controllers.MemberController.#ctor(HaveFun_API.Interface.IServices.IMemberService)">
+        <member name="M:HaveFun_API.Controllers.MemberController.#ctor(HaveFun_API.Interface.IServices.IMemberService,HaveFun_API.Interface.IServices.ILoginService)">
             <summary>
             建構子
             </summary>
@@ -40,6 +40,13 @@
         <member name="M:HaveFun_API.Controllers.MemberController.Insert(HaveFun_API.Models.DTO.MemberBaseDTO)">
             <summary>
             新增成員
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Controllers.MemberController.Login(HaveFun_API.Models.DTO.LoginDTO)">
+            <summary>
+            登入
             </summary>
             <param name="dto"></param>
             <returns></returns>
@@ -265,6 +272,28 @@
             結果
             </summary>
         </member>
+        <member name="T:HaveFun_API.Examples.MemberBaseExample">
+            <summary>
+            模型範例
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Examples.MemberBaseExample.GetExamples">
+            <summary>
+            建構子
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HaveFun_API.Examples.LoginExample">
+            <summary>
+            模型範例
+            </summary>
+        </member>
+        <member name="M:HaveFun_API.Examples.LoginExample.GetExamples">
+            <summary>
+            建構子
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HaveFun_API.Examples.GoogleExample">
             <summary>
             模型範例
@@ -276,15 +305,22 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:HaveFun_API.Examples.MemberBaseExample">
+        <member name="T:HaveFun_API.Middleware.JwtMiddleware">
             <summary>
-            模型範例
+            Jwt Middleware
             </summary>
         </member>
-        <member name="M:HaveFun_API.Examples.MemberBaseExample.GetExamples">
+        <member name="M:HaveFun_API.Middleware.JwtMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
             <summary>
             建構子
             </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:HaveFun_API.Middleware.JwtMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            投放下一步
+            </summary>
+            <param name="context"></param>
             <returns></returns>
         </member>
         <member name="T:HaveFun_API.Models.DTO.AddressBaseDTO">
@@ -333,6 +369,31 @@
             </summary>
         </member>
         <member name="P:HaveFun_API.Models.DTO.AuthorityMemberDTO.RefreshToken">
+             <summary>
+            Token
+             </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.AuthorityMemberDTO.AccessToken">
+             <summary>
+            Token
+             </summary>
+        </member>
+        <member name="T:HaveFun_API.Models.DTO.RefreshTokenDTO">
+            <summary>
+            RefreshToken
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.RefreshTokenDTO.Token">
+             <summary>
+            Token
+             </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.RefreshTokenDTO.Expiration">
+             <summary>
+            Token
+             </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.RefreshTokenDTO.UserId">
              <summary>
             Token
              </summary>
@@ -389,7 +450,7 @@
         </member>
         <member name="P:HaveFun_API.Models.DTO.GoogleLoginDTO.Token">
             <summary>
-            登入token
+            Access Token
             </summary>
         </member>
         <member name="P:HaveFun_API.Models.DTO.GoogleLoginDTO.IsMember">
@@ -452,9 +513,14 @@
             RefreshToken
             </summary>
         </member>
-        <member name="P:HaveFun_API.Models.DTO.MemberDTO.Token">
+        <member name="P:HaveFun_API.Models.DTO.MemberDTO.AccessToken">
             <summary>
             Token
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.MemberDTO.Expiration">
+            <summary>
+            過期時間
             </summary>
         </member>
         <member name="P:HaveFun_API.Models.DTO.MemberDTO.AuthorityType">
@@ -462,9 +528,24 @@
             權限類別
             </summary>
         </member>
+        <member name="T:HaveFun_API.Models.DTO.LoginDTO">
+            <summary>
+            登入
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.LoginDTO.Mail">
+            <summary>
+            郵箱
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.DTO.LoginDTO.Password">
+            <summary>
+            密碼
+            </summary>
+        </member>
         <member name="T:HaveFun_API.Models.DTO.RequestDTO">
             <summary>
-            刪除
+            編號
             </summary>
         </member>
         <member name="P:HaveFun_API.Models.DTO.RequestDTO.ID">
@@ -809,12 +890,12 @@
         </member>
         <member name="P:HaveFun_API.Models.PO.MemberPO.RefreshToken">
             <summary>
-            RefreshToken
+            Refresh Token
             </summary>
         </member>
-        <member name="P:HaveFun_API.Models.PO.MemberPO.Token">
+        <member name="P:HaveFun_API.Models.PO.MemberPO.AccessToken">
             <summary>
-            Token
+            Access Token
             </summary>
         </member>
         <member name="P:HaveFun_API.Models.PO.MemberPO.Mail">
@@ -845,6 +926,16 @@
         <member name="P:HaveFun_API.Models.PO.MemberPO.AuthorityType">
             <summary>
             權限類別
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.Expiration">
+            <summary>
+            過期時間
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.PO.MemberPO.CreateTime">
+            <summary>
+            過期時間
             </summary>
         </member>
         <member name="T:HaveFun_API.Models.PO.MemberShipPO">
@@ -1097,6 +1188,21 @@
             區碼
             </summary>
         </member>
+        <member name="T:HaveFun_API.Models.VO.MemberLoginVO">
+            <summary>
+            成員登入
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.VO.MemberLoginVO.RefreshToken">
+            <summary>
+            RefreshToken
+            </summary>
+        </member>
+        <member name="P:HaveFun_API.Models.VO.MemberLoginVO.AccessToken">
+            <summary>
+            Token
+            </summary>
+        </member>
         <member name="T:HaveFun_API.Repositories.AddressRepository">
             <summary>
             地址
@@ -1245,6 +1351,21 @@
             JWT密碼
             </summary>
         </member>
+        <member name="F:HaveFun_API.Schafold.Global.ExpiredTime">
+            <summary>
+            Access到期時間
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Schafold.Global.RefreshTokenExpiredTime">
+            <summary>
+            Refresh到期時間
+            </summary>
+        </member>
+        <member name="F:HaveFun_API.Schafold.Global.FontEndUri">
+            <summary>
+            前端網址
+            </summary>
+        </member>
         <member name="T:HaveFun_API.Schafold.HaveFunContext">
             <summary>
             Context
@@ -1358,30 +1479,37 @@
             JWT
             </summary>
         </member>
-        <member name="M:HaveFun_API.Services.JWTService.#ctor(Microsoft.IdentityModel.Tokens.TokenValidationParameters)">
+        <member name="M:HaveFun_API.Services.JWTService.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <summary>
             建構子
             </summary>
         </member>
-        <member name="M:HaveFun_API.Services.JWTService.GenerateToken(HaveFun_API.Models.DTO.MemberDTO,System.String)">
+        <member name="M:HaveFun_API.Services.JWTService.GenerateToken(HaveFun_API.Models.PO.MemberPO,System.String)">
             <summary>
             產生Token
             </summary>
             <param name="dto"></param>
-            <param name="Access"></param>
+            <param name="access"></param>
             <returns></returns>
         </member>
-        <member name="M:HaveFun_API.Services.JWTService.ParseToeknToClaim(System.String)">
+        <member name="M:HaveFun_API.Services.JWTService.GenerateRefreshToken(System.Int32)">
+            <summary>
+            產生Refresh Token
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Services.JWTService.ParseTokenToClaim(System.String)">
             <summary>
             解析權杖為宣告
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HaveFun_API.Services.JWTService.Verify(System.String)">
+        <member name="M:HaveFun_API.Services.JWTService.ValidateRefreshToken(HaveFun_API.Models.DTO.RefreshTokenDTO)">
             <summary>
-            驗證
+            驗證Token
             </summary>
-            <param name="token"></param>
+            <param name="refreshToken"></param>
             <returns></returns>
         </member>
         <member name="T:HaveFun_API.Services.LoginService">
@@ -1406,6 +1534,21 @@
             </summary>
             <param name="code"></param>
             <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Services.LoginService.Login(HaveFun_API.Models.DTO.LoginDTO,System.Boolean)">
+            <summary>
+            登入
+            </summary>
+            <param name="dto">登入模型</param>
+            <param name="isGoogle">是否為Google登入</param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Services.LoginService.GetToken(HaveFun_API.Models.PO.MemberPO)">
+            <summary>
+            取得Token
+            </summary>
+            <param name="dto"></param>
             <returns></returns>
         </member>
         <member name="T:HaveFun_API.Services.MemberService">
@@ -1509,9 +1652,16 @@
         </member>
         <member name="M:HaveFun_API.Utility.Tool.IsValidEmail(System.String)">
             <summary>
-            是否為正確的郵件
+            是否為正確的郵件格式
             </summary>
             <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HaveFun_API.Utility.Tool.IsValidPassword(System.String)">
+            <summary>
+            是否為正確的密碼格式
+            </summary>
+            <param name="password"></param>
             <returns></returns>
         </member>
     </members>

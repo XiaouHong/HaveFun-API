@@ -1,6 +1,4 @@
 ﻿using HaveFun_API.Enum;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HaveFun_API.Models.PO;
@@ -17,16 +15,16 @@ public class MemberPO
     public int ID { get; set; } = 0;
 
 	/// <summary>
-	/// RefreshToken
+	/// Refresh Token
 	/// </summary>
 	[MaxLength(500)]
 	public string RefreshToken { get; set; } = "";
 
 	/// <summary>
-	/// Token
+	/// Access Token
 	/// </summary>
 	[MaxLength(500)]
-	public string Token { get; set; } = "";
+	public string AccessToken { get; set; } = "";
 
 	/// <summary>
 	/// 郵箱
@@ -60,4 +58,14 @@ public class MemberPO
     /// 權限類別
     /// </summary>
     public AuthorityType AuthorityType { get; set; } = AuthorityType.Normal;
+
+	/// <summary>
+	/// 過期時間
+	/// </summary>
+	public DateTime Expiration { get; set; } = DateTime.SpecifyKind(new DateTime(1911, 1, 1), DateTimeKind.Utc).Date;
+
+	/// <summary>
+	/// 過期時間
+	/// </summary>
+	public DateTime CreateTime { get; set; } = DateTime.Now;
 }

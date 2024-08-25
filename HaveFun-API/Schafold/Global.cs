@@ -24,5 +24,20 @@
 		/// JWT密碼
 		/// </summary>
 		public static string JWTSecret = "";
+
+		/// <summary>
+		/// Access到期時間
+		/// </summary>
+		public static double ExpiredTime = 0;
+
+		/// <summary>
+		/// Refresh到期時間
+		/// </summary>
+		public static double RefreshTokenExpiredTime = 0;
+
+		/// <summary>
+		/// 前端網址
+		/// </summary>
+		public static string FontEndUri = "";
 	}
 }

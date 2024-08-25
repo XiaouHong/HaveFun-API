@@ -3,7 +3,7 @@
 namespace HaveFun_API.Models.DTO
 {
 	/// <summary>
-	/// 刪除
+	/// 編號
 	/// </summary>
 	public class RequestDTO
 	{
